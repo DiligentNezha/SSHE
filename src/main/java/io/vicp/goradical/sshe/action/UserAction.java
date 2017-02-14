@@ -18,7 +18,7 @@ import java.util.UUID;
 @ParentPackage("basePackage")
 @Namespace("/")
 @Action(value = "userAction")
-public class UserAction extends ActionSupport{
+public class UserAction extends ActionSupport {
 	private static final Logger LOG = LogManager.getLogger(UserAction.class);
 
 	@Autowired
