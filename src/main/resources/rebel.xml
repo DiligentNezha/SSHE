@@ -13,7 +13,7 @@
 
 	<web>
 		<link target="/">
-			<dir name="D:/JavaEE/SSHE/web">
+			<dir name="D:/JavaEE/SSHE/src/main/webapp">
 			</dir>
 		</link>
 	</web>
