@@ -11,7 +11,7 @@
 	<context:property-placeholder location="classpath:db.properties"/>
 
 	<!-- 自动扫描包 -->
-	<context:component-scan base-package="io.vicp.goradical.sshe"></context:component-scan>
+	<context:component-scan base-package="io.vicp.goradical.sshe.dao.impl,io.vicp.goradical.sshe.service.impl"></context:component-scan>
 
 	<!-- 配置 C3P0 数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -77,7 +77,7 @@
 
 	<!-- 3. 配置事务切入点, 再把事务属性和事务切入点关联起来 -->
 	<aop:config>
-		<aop:pointcut expression="execution(* *..*ServiceI.*(..))" id="txPointcut"/>
+		<aop:pointcut expression="execution(* *..*Service.*(..))" id="txPointcut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
 	</aop:config>
 
