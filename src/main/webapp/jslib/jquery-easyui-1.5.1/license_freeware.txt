@@ -11,4 +11,4 @@ a) Distribute the modified software or part(s) of it as standalone application.
 b) Sublicense, rent, lease or lend any portion of the software.
 c) Modify or remove any copyright notices from any of the software files.
 
-jQuery EasyUI Team retains all ownership rights to the software.
+jQuery EasyUI Team retains all ownership allRights to the software.
