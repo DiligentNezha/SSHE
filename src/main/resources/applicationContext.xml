@@ -13,7 +13,7 @@
 	<!-- 自动扫描包 -->
 	<context:component-scan base-package="io.vicp.goradical.sshe.dao.impl,io.vicp.goradical.sshe.service.impl"></context:component-scan>
 
-	<!-- 配置 C3P0 数据源 -->
+	<!-- 配置 druid 数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="username" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.password}"></property>

@@ -5,6 +5,7 @@
 		"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<constant name="struts.ui.theme" value="simple"></constant>
 	<constant name="struts.serve.static.browserCache" value="false"></constant>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
