@@ -1,40 +1,54 @@
 package io.vicp.goradical.sshe.action;
 
-import com.opensymphony.xwork2.ActionSupport;
-import io.vicp.goradical.sshe.model.User;
+import com.opensymphony.xwork2.ModelDriven;
+import io.vicp.goradical.sshe.model.vo.Json;
+import io.vicp.goradical.sshe.model.vo.UserVo;
 import io.vicp.goradical.sshe.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import java.util.Date;
-import java.util.UUID;
-
-@ParentPackage("basePackage")
 @Namespace("/")
 @Action(value = "userAction")
-public class UserAction extends ActionSupport {
+public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 	private static final Logger LOG = LogManager.getLogger(UserAction.class);
 
 	@Autowired
 	private UserService userService;
 
-	public void test() {
-		LOG.info("进入Action");
-		LOG.info("update");
-		LOG.info(WebApplicationContextUtils.getWebApplicationContext(ServletActionContext.getServletContext()));
+	private UserVo userVo = new UserVo();
+
+	public void reg() {
+		Json json = new Json();
+		try {
+			userService.save(userVo);
+			json.setSuccess(true);
+			json.setMsg("注册成功!");
+		} catch (Exception e) {
+			json.setMsg("注册失败!");
+			e.printStackTrace();
+		} finally {
+			super.writeJson(json);
+		}
 	}
 
-	public void addUser() {
-		User user = new User();
-		user.setUuid(UUID.randomUUID().toString());
-		user.setName("radical from web!");
-		user.setCreateTime(new Date());
-		userService.save(user);
+	public void login() {
+		UserVo resultUser = userService.login(userVo);
+		Json json= new Json();
+		if (resultUser != null) {
+			json.setSuccess(true);
+			json.setMsg("登陆成功!");
+		} else {
+			json.setMsg("登陆失败,用户名或密码错误!");
+		}
+		super.writeJson(json);
+	}
+
+
+	@Override
+	public UserVo getModel() {
+		return userVo;
 	}
 }

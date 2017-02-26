@@ -1,12 +1,12 @@
 package io.vicp.goradical.sshe.service;
 
-import io.vicp.goradical.sshe.model.User;
+import io.vicp.goradical.sshe.model.vo.UserVo;
 
 import java.io.Serializable;
 
 public interface UserService {
 
-	void test();
+	Serializable save(UserVo userVo);
 
-	Serializable save(User user);
+	UserVo login(UserVo userVo);
 }

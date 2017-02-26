@@ -1,37 +1,25 @@
-package io.vicp.goradical.sshe.model;
+package io.vicp.goradical.sshe.model.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "t_user")
-public class User implements Serializable{
-
-	@Id
+public class UserVo implements Serializable {
 	private String id;
 
-	@Column(length = 20)
 	private String name;
 
-	@Column(length = 32)
 	private String pwd;
 
-	@Column(name = "create_time")
 	private Date createTime;
 
-	@Column(name = "modify_time")
 	private Date modifyTime;
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String uuid) {
-		this.id = uuid;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {

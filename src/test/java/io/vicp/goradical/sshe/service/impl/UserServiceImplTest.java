@@ -1,6 +1,6 @@
 package io.vicp.goradical.sshe.service.impl;
 
-import io.vicp.goradical.sshe.model.User;
+import io.vicp.goradical.sshe.model.vo.UserVo;
 import io.vicp.goradical.sshe.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +23,8 @@ public class UserServiceImplTest {
 
 	@Test
 	public void save() throws Exception {
-		User user = new User();
-		user.setUuid(UUID.randomUUID().toString());
+		UserVo user = new UserVo();
+		user.setId(UUID.randomUUID().toString());
 		user.setName("radical");
 		user.setCreateTime(new Date());
 		userService.save(user);

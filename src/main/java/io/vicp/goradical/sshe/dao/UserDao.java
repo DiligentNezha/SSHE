@@ -2,8 +2,6 @@ package io.vicp.goradical.sshe.dao;
 
 import io.vicp.goradical.sshe.model.User;
 
-import java.io.Serializable;
+public interface UserDao extends BaseDao<User> {
 
-public interface UserDao {
-	Serializable save(User user);
 }
