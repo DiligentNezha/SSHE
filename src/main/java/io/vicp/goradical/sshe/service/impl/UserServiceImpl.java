@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service("userService")
@@ -32,8 +34,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVo login(UserVo userVo) {
-		String hql = "from User u where u.name = '" + userVo.getName() + "' and u.pwd = '" + DataUtil.md5(userVo.getPwd()) + "'";
-		User user = (User) userDao.get(hql);
+//		String hql = "from User u where u.name = '" + userVo.getName() + "' and u.pwd = '" + DataUtil.md5(userVo.getPwd()) + "'";
+//		String hql = "from User u where u.name = ? and u.pwd = ?";
+		String hql = "from User u where u.name = :name and u.pwd = :pwd";
+		Map<String, Object> params = new HashMap();
+		params.put("name", userVo.getName());
+		params.put("pwd", DataUtil.md5(userVo.getPwd()));
+		User user = (User) userDao.get(hql, params);
 		if (user != null) {
 			return userVo;
 		}

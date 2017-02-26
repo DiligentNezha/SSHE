@@ -1,9 +1,6 @@
 package io.vicp.goradical.sshe.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,19 +9,22 @@ import java.util.Date;
 public class User implements Serializable{
 
 	@Id
+	@Column(unique = true, nullable = false, length = 36)
 	private String id;
 
-	@Column(length = 20)
+	@Column(unique = true, nullable =  false, length = 100)
 	private String name;
 
-	@Column(length = 32)
+	@Column(nullable = false, length = 32)
 	private String pwd;
 
-	@Column(name = "create_time")
-	private Date createTime;
-
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modify_time")
 	private Date modifyTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_time")
+	private Date createTime;
 
 	public String getId() {
 		return id;
