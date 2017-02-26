@@ -1,7 +1,7 @@
 package io.vicp.goradical.sshe.action;
 
 import com.opensymphony.xwork2.ModelDriven;
-import io.vicp.goradical.sshe.model.vo.Json;
+import io.vicp.goradical.sshe.model.vo.JsonVo;
 import io.vicp.goradical.sshe.model.vo.UserVo;
 import io.vicp.goradical.sshe.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -21,29 +21,29 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 	private UserVo userVo = new UserVo();
 
 	public void reg() {
-		Json json = new Json();
+		JsonVo jsonVo = new JsonVo();
 		try {
 			userService.save(userVo);
-			json.setSuccess(true);
-			json.setMsg("注册成功!");
+			jsonVo.setSuccess(true);
+			jsonVo.setMsg("注册成功!");
 		} catch (Exception e) {
-			json.setMsg("注册失败!");
+			jsonVo.setMsg("注册失败!");
 			e.printStackTrace();
 		} finally {
-			super.writeJson(json);
+			super.writeJson(jsonVo);
 		}
 	}
 
 	public void login() {
 		UserVo resultUser = userService.login(userVo);
-		Json json= new Json();
+		JsonVo jsonVo = new JsonVo();
 		if (resultUser != null) {
-			json.setSuccess(true);
-			json.setMsg("登陆成功!");
+			jsonVo.setSuccess(true);
+			jsonVo.setMsg("登陆成功!");
 		} else {
-			json.setMsg("登陆失败,用户名或密码错误!");
+			jsonVo.setMsg("登陆失败,用户名或密码错误!");
 		}
-		super.writeJson(json);
+		super.writeJson(jsonVo);
 	}
 
 

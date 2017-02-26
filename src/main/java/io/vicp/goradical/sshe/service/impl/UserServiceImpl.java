@@ -19,8 +19,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private BaseDao userDao;
-
+	private BaseDao<User> userDao;
 
 	@Override
 	public Serializable save(UserVo userVo) {

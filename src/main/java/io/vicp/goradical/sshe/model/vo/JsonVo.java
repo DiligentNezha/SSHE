@@ -2,7 +2,7 @@ package io.vicp.goradical.sshe.model.vo;
 
 import java.io.Serializable;
 
-public class Json implements Serializable{
+public class JsonVo implements Serializable{
 	private boolean success = false;
 	private String msg = "";
 	private Object obj = null;
