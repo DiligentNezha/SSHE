@@ -50,8 +50,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public T get(String hql, Map<String, Object> params) {
 		Query query = getCurrentSession().createQuery(hql);
-		for (String s : params.keySet()) {
-			query.setParameter(s, params.get(s));
+		if (params != null) {
+			for (String s : params.keySet()) {
+				query.setParameter(s, params.get(s));
+			}
 		}
 		List list = query.list();
 		if (list != null && list.size() > 0) {
@@ -69,8 +71,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public List<T> find(String hql, Map<String, Object> params) {
 		Query query = getCurrentSession().createQuery(hql);
-		for (String s : params.keySet()) {
-			query.setParameter(s, params.get(s));
+		if (params != null) {
+			for (String s : params.keySet()) {
+				query.setParameter(s, params.get(s));
+			}
 		}
 		return query.list();
 	}
@@ -84,8 +88,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public List<T> find(String hql, Map<String, Object> params, int page, int rows) {
 		Query query = getCurrentSession().createQuery(hql);
-		for (String s : params.keySet()) {
-			query.setParameter(s, params.get(s));
+		if (params != null) {
+			for (String s : params.keySet()) {
+				query.setParameter(s, params.get(s));
+			}
 		}
 		return query.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
 	}
@@ -99,8 +105,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public Long count(String hql, Map<String, Object> params) {
 		Query query = getCurrentSession().createQuery(hql);
-		for (String s : params.keySet()) {
-			query.setParameter(s, params.get(s));
+		if (params != null) {
+			for (String s : params.keySet()) {
+				query.setParameter(s, params.get(s));
+			}
 		}
 		return (Long) query.uniqueResult();
 	}

@@ -40,11 +40,11 @@
     <table>
       <tr>
         <th>登录名</th>
-        <td><input autofocus="autofocus" name="name" type="text" class="easyui-validatebox" data-options="required:true,missingMessage:'用户名不能为空!'"/></td>
+        <td><input autofocus="autofocus" name="name" value="root" type="text" class="easyui-validatebox" data-options="required:true,missingMessage:'用户名不能为空!'"/></td>
       </tr>
       <tr>
         <th>密码</th>
-        <td><input name="pwd" type="password" class="easyui-validatebox" data-options="required:true,missingMessage:'密码不能为空!'"/></td>
+        <td><input name="pwd" type="password" value="root" class="easyui-validatebox" data-options="required:true,missingMessage:'密码不能为空!'"/></td>
       </tr>
     </table>
   </form>

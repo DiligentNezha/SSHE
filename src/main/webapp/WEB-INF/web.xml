@@ -17,18 +17,20 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+
+
 	<!--
 	openSessionInViewFilter,该过滤器在view渲染时始终开启session，
 	一劳永逸解决hibernate懒加载问题，该过滤器必须配置在strut2过滤器之前,不推荐使用(性能问题)
 	-->
-	<!--<filter>
+	<filter>
 		<filter-name>openSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>openSessionInViewFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>-->
+	</filter-mapping>
 
 	<!-- 配置 Struts2 的 Filter -->
 	<filter>

@@ -9,6 +9,7 @@ public class MenuVo implements Serializable{
 
 	private String id;
 	private String text;
+	private String state;
 	private String iconcls;
 	private String url;
 
@@ -42,6 +43,14 @@ public class MenuVo implements Serializable{
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getIconcls() {
