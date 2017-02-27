@@ -35,6 +35,10 @@ public class MenuServiceImpl implements MenuService{
 			for (Menu menu : list) {
 				MenuVo menuVo = new MenuVo();
 				BeanUtils.copyProperties(menu, menuVo);
+
+				Map<String, Object> attributes = new HashMap<>();
+				attributes.put("url", menu.getUrl());
+				menuVo.setAttributes(attributes);
 				Set<Menu> menus = menu.getMenus();
 				if (menus != null && !menus.isEmpty()) {
 					menuVo.setState("closed");//节点以文件夹形式体现

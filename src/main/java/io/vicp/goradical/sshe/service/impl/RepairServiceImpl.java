@@ -63,7 +63,7 @@ public class RepairServiceImpl implements RepairService{
 		userManager.setId("038b923e-3edb-yhgl-be40-80eb508be047");
 		userManager.setMenu(sysManager);
 		userManager.setText("用户管理");
-		userManager.setUrl("");
+		userManager.setUrl("/admin/user-manager.jsp");
 		menuDao.saveOrUpdate(userManager);
 
 		Menu roleManager = new Menu();

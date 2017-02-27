@@ -1,6 +1,7 @@
 package io.vicp.goradical.sshe.model.vo;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class MenuVo implements Serializable{
 	//父节点
@@ -11,7 +12,7 @@ public class MenuVo implements Serializable{
 	private String text;
 	private String state;
 	private String iconcls;
-	private String url;
+	private Map<String, Object> attributes;
 
 	public String getPid() {
 		return pid;
@@ -61,11 +62,11 @@ public class MenuVo implements Serializable{
 		this.iconcls = iconcls;
 	}
 
-	public String getUrl() {
-		return url;
+	public Map<String, Object> getAttributes() {
+		return attributes;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setAttributes(Map<String, Object> attributes) {
+		this.attributes = attributes;
 	}
 }
