@@ -4,15 +4,15 @@
 <head>
   <title>home</title>
   <%-- easyui 样式引入--%>
-  <link rel="stylesheet" href="jslib/jquery-easyui-1.5.1/themes/default/easyui.css" type="text/css">
-  <link rel="stylesheet" href="jslib/jquery-easyui-1.5.1/themes/icon.css" type="text/css">
+  <link rel="stylesheet" href="js/jquery-easyui-1.5.1/themes/default/easyui.css" type="text/css">
+  <link rel="stylesheet" href="js/jquery-easyui-1.5.1/themes/icon.css" type="text/css">
   <%-- easyui js 引入--%>
-  <script type="text/javascript" src="jslib/jquery-easyui-1.5.1/jquery.min.js"></script>
-  <script type="text/javascript" src="jslib/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
-  <script type="text/javascript" src="jslib/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+  <script type="text/javascript" src="js/jquery-easyui-1.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="js/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
   
   <%-- 自定义工具js库引入--%>
-  <script type="text/javascript" src="jslib/myjsutils/myUtils.js"></script>
+  <script type="text/javascript" src="js/myjsutils/myUtils.js"></script>
   
 
 </head>

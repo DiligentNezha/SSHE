@@ -2,6 +2,7 @@ package io.vicp.goradical.sshe.service.impl;
 
 import io.vicp.goradical.sshe.dao.BaseDao;
 import io.vicp.goradical.sshe.model.User;
+import io.vicp.goradical.sshe.model.vo.DataGridVo;
 import io.vicp.goradical.sshe.model.vo.UserVo;
 import io.vicp.goradical.sshe.service.UserService;
 import io.vicp.goradical.sshe.util.DataUtil;
@@ -10,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -44,6 +42,25 @@ public class UserServiceImpl implements UserService {
 			return userVo;
 		}
 		return null;
+	}
+
+	@Override
+	public DataGridVo datagrid() {
+		DataGridVo dgv = new DataGridVo();
+		String hql = "from User u";
+		String totalHql = "select count(*) " + hql;
+		List<User> users = userDao.find(hql);
+		List<UserVo> userVos = new ArrayList<>();
+		if (users != null && users.size() > 0) {
+			for (User user : users) {
+				UserVo userVo = new UserVo();
+				BeanUtils.copyProperties(user, userVo);
+				userVos.add(userVo);
+			}
+		}
+		dgv.setTotal(userDao.count(totalHql));
+		dgv.setRows(userVos);
+		return dgv;
 	}
 
 }
