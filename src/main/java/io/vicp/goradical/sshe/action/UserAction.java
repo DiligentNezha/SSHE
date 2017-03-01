@@ -47,7 +47,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 	}
 
 	public void datagrid() {
-		super.writeJson(userService.datagrid());
+		super.writeJson(userService.datagrid(userVo));
 	}
 
 	@Override

@@ -11,5 +11,5 @@ public interface UserService {
 
 	UserVo login(UserVo userVo);
 
-	DataGridVo datagrid();
+	DataGridVo datagrid(UserVo userVo);
 }

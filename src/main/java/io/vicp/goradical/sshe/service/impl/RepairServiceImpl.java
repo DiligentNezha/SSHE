@@ -5,16 +5,17 @@ import io.vicp.goradical.sshe.model.Menu;
 import io.vicp.goradical.sshe.model.User;
 import io.vicp.goradical.sshe.service.RepairService;
 import io.vicp.goradical.sshe.util.DataUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service(value = "repairService")
 public class RepairServiceImpl implements RepairService{
+
+	private static final Logger LOG = LogManager.getLogger(RepairServiceImpl.class);
 
 	@Autowired
 	private BaseDao<Menu> menuDao;
@@ -24,8 +25,10 @@ public class RepairServiceImpl implements RepairService{
 
 	@Override
 	public void repair() {
+		LOG.info("开始修复数据库.................");
 		repairUser();
 		repairMenu();
+		LOG.info("数据库修复完成.................");
 	}
 
 	private void repairUser() {
@@ -37,12 +40,35 @@ public class RepairServiceImpl implements RepairService{
 			user.setName(UUID.randomUUID().toString());
 		}
 
+		Random random = new Random();
+
 		User root = new User();
 		root.setId("bb6bb290-3b18-4e9f-a1ac-0ee2f9ab9792");
 		root.setName("root");
 		root.setPwd(DataUtil.md5("root"));
 		root.setModifyTime(new Date());
+		root.setCreateTime(new Date(new Date().getTime() - Math.abs(random.nextInt())));
 		userDao.saveOrUpdate(root);
+
+		User admin = new User();
+		admin.setId("bb6bb290-3b18-4e9f-adin-0ee2f9ab9792");
+		admin.setName("admin");
+		admin.setPwd(DataUtil.md5("admin"));
+		admin.setModifyTime(new Date());
+		admin.setCreateTime(new Date(new Date().getTime() - Math.abs(random.nextInt())));
+		userDao.saveOrUpdate(admin);
+
+		for (int i = 11; i < 100; i++) {
+			User userTemp = new User();
+			String str = "user" + i;
+			userTemp.setId(str + "90-3b18-4e9f-user-0ee2f9ab9792");
+			userTemp.setName(str);
+			userTemp.setPwd(DataUtil.md5("root"));
+			userTemp.setCreateTime(new Date(new Date().getTime() - Math.abs(random.nextInt())));
+			userTemp.setModifyTime(new Date());
+			userDao.saveOrUpdate(userTemp);
+		}
+
 	}
 
 	private void repairMenu() {

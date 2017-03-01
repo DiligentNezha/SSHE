@@ -45,17 +45,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public DataGridVo datagrid() {
+	public DataGridVo datagrid(UserVo userVo) {
 		DataGridVo dgv = new DataGridVo();
-		String hql = "from User u";
+		String hql = "from User u ";
 		String totalHql = "select count(*) " + hql;
-		List<User> users = userDao.find(hql);
+		if (userVo.getSort() != null) {
+			hql += "order by " + userVo.getSort() + " " + userVo.getOrder();
+		}
+		List<User> users = userDao.find(hql, userVo.getPage(), userVo.getRows());
 		List<UserVo> userVos = new ArrayList<>();
 		if (users != null && users.size() > 0) {
 			for (User user : users) {
-				UserVo userVo = new UserVo();
-				BeanUtils.copyProperties(user, userVo);
-				userVos.add(userVo);
+				UserVo userVoTemp = new UserVo();
+				BeanUtils.copyProperties(user, userVoTemp);
+				userVos.add(userVoTemp);
 			}
 		}
 		dgv.setTotal(userDao.count(totalHql));
