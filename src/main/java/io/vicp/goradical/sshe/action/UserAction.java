@@ -34,6 +34,20 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 		}
 	}
 
+	public void add() {
+		JsonVo jsonVo = new JsonVo();
+		try {
+			userService.save(userVo);
+			jsonVo.setSuccess(true);
+			jsonVo.setMsg("添加成功!");
+		} catch (Exception e) {
+			jsonVo.setMsg("添加失败!");
+			e.printStackTrace();
+		} finally {
+			super.writeJson(jsonVo);
+		}
+	}
+
 	public void login() {
 		UserVo resultUser = userService.login(userVo);
 		JsonVo jsonVo = new JsonVo();

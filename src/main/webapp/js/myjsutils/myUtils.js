@@ -1,7 +1,4 @@
 /**
- * Created by Kenny on 2017/2/15.
- */
-/**
  * @requires JQuery, EasyUI
  * 扩展validatebox,添加验证两次密码功能
  */
@@ -13,7 +10,11 @@ $.extend($.fn.validatebox.defaults.rules, {
     message: '两次输入的密码不一致！'
   }
 });
-
+/**
+ * 防止easyui panel移出浏览器窗口
+ * @param left
+ * @param top
+ */
 var easyuiPanelOnMove = function (left, top) {
   var l = left;
   var t = top;
@@ -39,9 +40,23 @@ var easyuiPanelOnMove = function (left, top) {
     left : l,
     top : t
   });
-}
+};
 $.fn.dialog.defaults.onMove = easyuiPanelOnMove;
 $.fn.window.defaults.onMove = easyuiPanelOnMove;
 $.fn.panel.defaults.onMove = easyuiPanelOnMove;
-
-
+/**
+ *
+ * @param form
+ * @returns {{}}
+ */
+serializeObject = function(form) {
+  var o = {};
+  $.each(form.serializeArray(), function(index) {
+    if (o[this['name']]) {
+      o[this['name']] = o[this['name']] + "," + this['value'];
+    } else {
+      o[this['name']] = this['value'];
+    }
+  });
+  return o;
+};

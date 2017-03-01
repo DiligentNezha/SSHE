@@ -31,13 +31,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVo login(UserVo userVo) {
-//		String hql = "from User u where u.name = '" + userVo.getName() + "' and u.pwd = '" + DataUtil.md5(userVo.getPwd()) + "'";
-//		String hql = "from User u where u.name = ? and u.pwd = ?";
 		String hql = "from User u where u.name = :name and u.pwd = :pwd";
 		Map<String, Object> params = new HashMap();
 		params.put("name", userVo.getName());
 		params.put("pwd", DataUtil.md5(userVo.getPwd()));
-		User user = (User) userDao.get(hql, params);
+		User user = userDao.get(hql, params);
 		if (user != null) {
 			return userVo;
 		}
