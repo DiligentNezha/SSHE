@@ -48,11 +48,13 @@ public class UserServiceImpl implements UserService {
 	public DataGridVo datagrid(UserVo userVo) {
 		DataGridVo dgv = new DataGridVo();
 		String hql = "from User u ";
+		Map<String, Object> params = new HashMap<>();
+		hql = addWhere(userVo, hql, params);
 		String totalHql = "select count(*) " + hql;
 		if (userVo.getSort() != null) {
-			hql += "order by " + userVo.getSort() + " " + userVo.getOrder();
+			hql += " order by " + userVo.getSort() + " " + userVo.getOrder();
 		}
-		List<User> users = userDao.find(hql, userVo.getPage(), userVo.getRows());
+		List<User> users = userDao.find(hql, params, userVo.getPage(), userVo.getRows());
 		List<UserVo> userVos = new ArrayList<>();
 		if (users != null && users.size() > 0) {
 			for (User user : users) {
@@ -61,9 +63,17 @@ public class UserServiceImpl implements UserService {
 				userVos.add(userVoTemp);
 			}
 		}
-		dgv.setTotal(userDao.count(totalHql));
+		dgv.setTotal(userDao.count(totalHql, params));
 		dgv.setRows(userVos);
 		return dgv;
+	}
+
+	private String addWhere(UserVo userVo, String hql, Map<String, Object> params) {
+		if (userVo.getName() != null && !"".equals(userVo.getName().trim())) {
+			hql += "where u.name like :name";
+			params.put("name", "%%" + userVo.getName().trim() + "%%");
+		}
+		return hql;
 	}
 
 }
