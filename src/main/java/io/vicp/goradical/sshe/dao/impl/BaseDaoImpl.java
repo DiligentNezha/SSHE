@@ -38,6 +38,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
+	public T get(Class<T> clz, Serializable id) {
+		return (T) getCurrentSession().get(clz, id);
+	}
+
+	@Override
 	public T get(String hql) {
 		Query query = getCurrentSession().createQuery(hql);
 		List list = query.list();
@@ -111,6 +116,12 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			}
 		}
 		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public int executeHQL(String hql) {
+		Query query = getCurrentSession().createQuery(hql);
+		return query.executeUpdate();
 	}
 
 	private Session getCurrentSession() {

@@ -13,6 +13,7 @@ public interface BaseDao<T> {
 
 	void saveOrUpdate(T t);
 
+	T get(Class<T> clz, Serializable id);
 	T get(String hql);
 	T get(String hql, Map<String, Object> params);
 
@@ -23,4 +24,6 @@ public interface BaseDao<T> {
 
 	Long count(String hql);
 	Long count(String hql, Map<String, Object> params);
+
+	int executeHQL(String hql);
 }

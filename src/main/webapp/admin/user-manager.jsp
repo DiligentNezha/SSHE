@@ -11,12 +11,19 @@
       idField: 'id',
       sortName: 'name',
       sortOrder: 'asc',
+      checkOnSelect: false,
+      selectOnCheck: true,
       frozenColumns: [[
-        {title: '编号', field: 'id', width: 150, hidden: true},
+        {title: '编号', field: 'id', checkbox: true, width: 150},
         {title: '名称', field: 'name', width: 150, sortable: true}
       ]],
-      columns: [[
-        {title: '密码', field: 'pwd', width: 150},
+      columns: [[{
+        title: '密码', field: 'pwd', width: 50,
+        formatter: function (value, row, index) {
+//        return '<span title="' + row.name + ':' + value + '">' + value + '</span>';
+          return '***********';
+        }
+      },
         {title: '创建时间', field: 'createTime', width: 150, sortable: true},
         {title: '修改时间', field: 'modifyTime', width: 150, sortable: true}
       ]],
@@ -30,7 +37,7 @@
         text: '删除',
         iconCls: 'icon-remove',
         handler: function () {
-
+          remove();
         }
       }, '-', {
         text: '修改',
@@ -48,6 +55,40 @@
     });
   });
 
+  function remove() {
+    var rows = $('#admin_usermanager_datagrid').datagrid('getChecked');
+    var ids = [];
+    if (rows.length > 0) {
+      $.messager.confirm('确认', '您是否要删除当前选中的项目?', function (r) {
+        if (r) {
+          for (var i = 0; i < rows.length; i++) {
+            ids.push(rows[i].id);
+          }
+          $.ajax({
+            url: '${pageContext.request.contextPath}/userAction!remove',
+            data: {
+              ids: ids.join(',')
+            },
+            dataType: 'json',
+            success: function (data) {
+              $('#admin_usermanager_datagrid').datagrid('load');
+              $('#admin_usermanager_datagrid').datagrid('unselectAll');
+              $.messager.show({
+                title: '提示',
+                msg: data.msg
+              });
+            }
+          });
+        }
+      });
+    } else {
+      $.messager.show({
+        title: '提示',
+        msg: '请勾选要删除的记录!'
+      });
+    }
+  }
+
   function searchFun() {
     var val = $('#admin_usermanager_layout input[name=name]').val();
     $('#admin_usermanager_datagrid').datagrid('load', {
@@ -56,7 +97,7 @@
   }
 
   function clearFun() {
-    var val = $('#admin_usermanager_layout input[name=name]').val('');
+    $('#admin_usermanager_layout input[name=name]').val('');
     $('#admin_usermanager_datagrid').datagrid('load', {});
   }
 
@@ -87,14 +128,19 @@
           $('#admin_usermanager_addForm').form('submit', {
             url: '${pageContext.request.contextPath}/userAction!add',
             success: function (data) {
-              var obj = $.parseJSON(data);
-              if (obj.success) {
-                $('#admin_usermanager_datagrid').datagrid('load');
+              var ob = $.parseJSON(data);
+              if (ob.success) {
+                <%--$('#admin_usermanager_datagrid').datagrid('load');--%>
+                <%--$('#admin_usermanager_datagrid').datagrid('appendRow', ob.obj);--%>
+                $('#admin_usermanager_datagrid').datagrid('insertRow',{
+                  index: 0,	// index start with 0
+                  row: ob.obj
+                });
                 $('#admin_usermanager_addDialog').dialog('close');
               }
               $.messager.show({
                   title:'提示',
-                  msg:obj.msg,
+                  msg:ob.msg,
                   timeout:5000,
                   showType:'slide'
               });

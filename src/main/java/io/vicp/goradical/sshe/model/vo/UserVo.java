@@ -10,6 +10,8 @@ public class UserVo implements Serializable {
 	private String sort;
 	private String order;
 
+	private String ids;
+
 	private String id;
 	private String name;
 	private String pwd;
@@ -46,6 +48,14 @@ public class UserVo implements Serializable {
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
 	}
 
 	public String getId() {

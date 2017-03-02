@@ -37,9 +37,10 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 	public void add() {
 		JsonVo jsonVo = new JsonVo();
 		try {
-			userService.save(userVo);
+			UserVo userVoResult = userService.save(userVo);
 			jsonVo.setSuccess(true);
 			jsonVo.setMsg("添加成功!");
+			jsonVo.setObj(userVoResult);
 		} catch (Exception e) {
 			jsonVo.setMsg("添加失败!\n" + e.getLocalizedMessage());
 			e.printStackTrace();
@@ -57,6 +58,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 		} else {
 			jsonVo.setMsg("登陆失败,用户名或密码错误!");
 		}
+		super.writeJson(jsonVo);
+	}
+
+	public void remove() {
+		userService.remove(userVo.getIds());
+		JsonVo jsonVo = new JsonVo();
+		jsonVo.setSuccess(true);
+		jsonVo.setMsg("删除成功!");
 		super.writeJson(jsonVo);
 	}
 

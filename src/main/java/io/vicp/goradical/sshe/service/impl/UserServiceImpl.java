@@ -10,7 +10,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.*;
 
 @Service("userService")
@@ -20,13 +19,15 @@ public class UserServiceImpl implements UserService {
 	private BaseDao<User> userDao;
 
 	@Override
-	public Serializable save(UserVo userVo) {
+	public UserVo save(UserVo userVo) {
 		User user = new User();
 		BeanUtils.copyProperties(userVo, user, new String[]{"pwd"});
 		user.setId(UUID.randomUUID().toString());
 		user.setCreateTime(new Date());
 		user.setPwd(DataUtil.md5(userVo.getPwd()));
-		return userDao.save(user);
+		userDao.save(user);
+		BeanUtils.copyProperties(user, userVo);
+		return userVo;
 	}
 
 	@Override
@@ -64,6 +65,20 @@ public class UserServiceImpl implements UserService {
 		dgv.setTotal(userDao.count(totalHql, params));
 		dgv.setRows(userVos);
 		return dgv;
+	}
+
+	@Override
+	public void remove(String ids) {
+		String[] nids = ids.split(",");
+		String hql = "delete User u where u.id in (";
+		for (int i = 0; i < nids.length; i++) {
+			if (i > 0) {
+				hql += ",";
+			}
+			hql += "'" + nids[i] + "'";
+		}
+		hql += ")";
+		userDao.executeHQL(hql);
 	}
 
 	private String addWhere(UserVo userVo, String hql, Map<String, Object> params) {
