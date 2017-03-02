@@ -12,5 +12,6 @@
 	<constant name="struts.devMode" value="true" />
 
 	<package name="basePackage" extends="struts-default">
+
 	</package>
 </struts>

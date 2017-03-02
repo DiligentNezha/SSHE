@@ -61,6 +61,7 @@
   }
 
   function append() {
+    $('#admin_usermanager_addForm input').val('');
     $('#admin_usermanager_addDialog').dialog('open');
   }
 </script>
@@ -101,7 +102,7 @@
           });
         }
      }]" style="width: 300px; height: 300px;" align="center">
-  <form id="admin_usermanager_addForm">
+  <form id="admin_usermanager_addForm" method="post">
     <table>
       <tr>
         <th>编号</th>

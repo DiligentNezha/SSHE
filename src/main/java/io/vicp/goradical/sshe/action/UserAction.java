@@ -27,7 +27,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 			jsonVo.setSuccess(true);
 			jsonVo.setMsg("注册成功!");
 		} catch (Exception e) {
-			jsonVo.setMsg("注册失败!");
+			jsonVo.setMsg("注册失败!\n" + e.getLocalizedMessage());
 			e.printStackTrace();
 		} finally {
 			super.writeJson(jsonVo);
@@ -41,7 +41,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 			jsonVo.setSuccess(true);
 			jsonVo.setMsg("添加成功!");
 		} catch (Exception e) {
-			jsonVo.setMsg("添加失败!");
+			jsonVo.setMsg("添加失败!\n" + e.getLocalizedMessage());
 			e.printStackTrace();
 		} finally {
 			super.writeJson(jsonVo);
