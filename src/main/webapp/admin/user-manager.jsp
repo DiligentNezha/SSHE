@@ -43,7 +43,7 @@
         text: '修改',
         iconCls: 'icon-edit',
         handler: function () {
-
+          editFun();
         }
       }, '-', {
         text: '清除',
@@ -54,6 +54,56 @@
       }]
     });
   });
+
+  function editFun() {
+    var rows = $('#admin_usermanager_datagrid').datagrid('getChecked');
+    if (rows.length == 1) {
+      var d = $('<div/>').dialog({
+        width: 300,
+        height: 300,
+        href: '${pageContext.request.contextPath}/admin/user-edit.jsp',
+        modal: true,
+        title: '编辑用户',
+        buttons: [{
+          text: '编辑',
+          handler: function () {
+            $('#admin_useredit_editForm').form('submit', {
+              url: '${pageContext.request.contextPath}/userAction!edit',
+              success: function (data) {
+                var ob = $.parseJSON(data);
+                if (ob.success) {
+                  d.dialog('close');
+//                  $('#admin_usermanager_datagrid').datagrid('reload');
+                  $('#admin_usermanager_datagrid').datagrid('updateRow',{
+                    index: $('#admin_usermanager_datagrid').datagrid('getRowIndex', rows[0]),
+                    row: ob.obj
+                  });
+                }
+                $.messager.show({
+                  title: '提示',
+                  msg: ob.msg,
+                  timeout: 5000,
+                  showType: 'slide'
+                });
+              }
+            });
+          }
+        }],
+        onClose: function () {
+          $(this).dialog("destroy");
+        },
+        onLoad: function () {
+          var form = $('#admin_useredit_editForm');
+          form.form('load', rows[0]);
+        }
+      });
+    } else {
+      $.messager.alert({
+        title: '提示',
+        msg: '请选择一条信息进行编辑!',
+      });
+    }
+  }
 
   function remove() {
     var rows = $('#admin_usermanager_datagrid').datagrid('getChecked');

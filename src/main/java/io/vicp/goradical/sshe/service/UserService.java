@@ -12,4 +12,6 @@ public interface UserService {
 	DataGridVo datagrid(UserVo userVo);
 
 	void remove(String ids);
+
+	UserVo edit(UserVo userVo);
 }

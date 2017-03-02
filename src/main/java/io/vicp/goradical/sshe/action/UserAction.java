@@ -69,6 +69,15 @@ public class UserAction extends BaseAction implements ModelDriven<UserVo>{
 		super.writeJson(jsonVo);
 	}
 
+	public void edit() {
+		UserVo userVoResult = userService.edit(userVo);
+		JsonVo jsonVo = new JsonVo();
+		jsonVo.setSuccess(true);
+		jsonVo.setMsg("编辑成功!");
+		jsonVo.setObj(userVoResult);
+		super.writeJson(jsonVo);
+	}
+
 	public void datagrid() {
 		super.writeJson(userService.datagrid(userVo));
 	}

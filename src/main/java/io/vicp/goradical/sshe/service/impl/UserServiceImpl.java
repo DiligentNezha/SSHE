@@ -81,6 +81,14 @@ public class UserServiceImpl implements UserService {
 		userDao.executeHQL(hql);
 	}
 
+	@Override
+	public UserVo edit(UserVo userVo) {
+		User user = userDao.get(User.class, userVo.getId());
+		userVo.setModifyTime(new Date());
+		BeanUtils.copyProperties(userVo, user, new String[]{"id", "pwd"});
+		return userVo;
+	}
+
 	private String addWhere(UserVo userVo, String hql, Map<String, Object> params) {
 		if (userVo.getName() != null && !"".equals(userVo.getName().trim())) {
 			hql += "where u.name like :name";
