@@ -4,7 +4,7 @@
 <head>
   <title>home</title>
   <%-- easyui 样式引入--%>
-  <link rel="stylesheet" href="js/jquery-easyui-1.5.1/themes/default/easyui.css" type="text/css">
+  <link rel="stylesheet" href="js/jquery-easyui-1.5.1/themes/bootstrap/easyui.css" type="text/css">
   <link rel="stylesheet" href="js/jquery-easyui-1.5.1/themes/icon.css" type="text/css">
   <%-- easyui js 引入--%>
   <script type="text/javascript" src="js/jquery-easyui-1.5.1/jquery.min.js"></script>
